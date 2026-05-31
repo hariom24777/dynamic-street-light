@@ -5,6 +5,9 @@ import { Zap, Leaf, Cpu, IndianRupee, Clock } from "lucide-react";
 
 const EnergyAnalytics = () => {
   const [data, setData] = useState(null);
+
+  const [currentTime, setCurrentTime] = useState(Math.floor(Date.now() / 1000));
+
   // User adjustable tariff rate state (defaulted to ₹8/kWh)
   const [ratePerKwh, setRatePerKwh] = useState(10);
 
@@ -14,10 +17,27 @@ const EnergyAnalytics = () => {
       const firebaseData = snapshot.val();
       setData(firebaseData);
     });
-    return () => unsubscribe();
+
+    const timer = setInterval(() => {
+      setCurrentTime(Math.floor(Date.now() / 1000));
+    }, 1000);
+
+    return () => {
+      unsubscribe();
+      clearInterval(timer);
+    };
   }, []);
 
-  
+  const lastUpdate = data?.lastUpdate || 0;
+
+  const secondsAgo = currentTime - lastUpdate;
+
+  const isDeviceOnline =
+    !!data &&
+    data.wifiConnected === true &&
+    data.internetStatus === true &&
+    secondsAgo < 10;
+
   // Loading State
 
   if (!data) {
@@ -31,15 +51,26 @@ const EnergyAnalytics = () => {
     );
   }
 
-  
   // Fixed energy & cost calculation logic
 
   const LED_POWER = 5;
 
   // Convert raw milliseconds to fractional hours
-  const led1Hours = (data.led1Runtime || 0) / 1000 / 60 / 60;
-  const led2Hours = (data.led2Runtime || 0) / 1000 / 60 / 60;
-  const led3Hours = (data.led3Runtime || 0) / 1000 / 60 / 60;
+  const led1Runtime =
+    (data.led1Runtime || 0) +
+    (isDeviceOnline && data.led1 ? secondsAgo * 1000 : 0);
+
+  const led2Runtime =
+    (data.led2Runtime || 0) +
+    (isDeviceOnline && data.led2 ? secondsAgo * 1000 : 0);
+
+  const led3Runtime =
+    (data.led3Runtime || 0) +
+    (isDeviceOnline && data.led3 ? secondsAgo * 1000 : 0);
+
+  const led1Hours = led1Runtime / 1000 / 60 / 60;
+  const led2Hours = led2Runtime / 1000 / 60 / 60;
+  const led3Hours = led3Runtime / 1000 / 60 / 60;
 
   // 1. REAL ENERGY USED (Keep as numbers for clean math)
   const led1Energy = led1Hours * LED_POWER;
@@ -78,7 +109,6 @@ const EnergyAnalytics = () => {
     (data.led1 ? 1 : 0) + (data.led2 ? 1 : 0) + (data.led3 ? 1 : 0);
   const totalSystemHours = led1Hours + led2Hours + led3Hours;
 
- 
   return (
     <section className="mt-8">
       {/* Row Header Label */}
