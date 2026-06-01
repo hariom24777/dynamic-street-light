@@ -8,7 +8,7 @@ const Navbar = () => {
   // Navigation Array
   const NAV_LINKS = [
     { to: "/", label: "Dashboard" },
-    { to: "/overview", label: "Project Overview" },
+    { to: "/overview", label: "Overview" },
   ];
 
   // handle bg scrolling
@@ -95,9 +95,7 @@ const Navbar = () => {
         }`}
       >
         <div className="bg-black px-2 py-13 flex flex-col gap-4 w-full">
-          <p className="text-zinc-600 uppercase mb-4 border-b border-zinc-900 pb-4">
-            
-          </p>
+          <p className="text-zinc-600 uppercase mb-4 border-b border-zinc-900 pb-4"></p>
 
           {NAV_LINKS.map((link) => (
             <NavLink

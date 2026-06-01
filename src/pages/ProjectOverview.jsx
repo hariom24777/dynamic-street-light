@@ -1,10 +1,19 @@
 import React from "react";
-import { Cpu, GraduationCap, Award, ShieldAlert, FileText, Layers, ShieldUser } from "lucide-react";
+import {
+  Cpu,
+  GraduationCap,
+  Award,
+  ShieldAlert,
+  FileText,
+  Layers,
+  ShieldUser,
+} from "lucide-react";
 import {
   PROJECT_DETAILS,
   TEAM_DETAILS,
   FACULTY_DETAILS,
 } from "../data/constants";
+import CodeViewer from "../components/CodeViewer";
 
 const ProjectOverview = () => {
   return (
@@ -143,6 +152,7 @@ const ProjectOverview = () => {
           </div>
         </div>
       </section>
+      <CodeViewer/>
     </div>
   );
 };

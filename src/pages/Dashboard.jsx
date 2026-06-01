@@ -102,7 +102,7 @@ const Dashboard = () => {
               {/* 2. WiFi Status Card */}
               <div
                 className={`p-4 rounded-xl bg-zinc-950/40 border transition-all duration-300 flex flex-col justify-between ${
-                  isDeviceOnline && data?.wifiConnected
+                  isDeviceOnline 
                     ? "border-emerald-500/20 shadow-md shadow-emerald-950/10"
                     : "border-red-500/20 shadow-md shadow-red-950/10"
                 }`}
@@ -112,12 +112,12 @@ const Dashboard = () => {
                 </p>
                 <p
                   className={`font-mono text-xs font-black tracking-widest mt-2 uppercase truncate ${
-                    isDeviceOnline && data?.wifiConnected
+                    isDeviceOnline
                       ? "text-emerald-400 drop-shadow-[0_0_6px_rgba(52,211,153,0.2)]"
                       : "text-red-400 drop-shadow-[0_0_6px_rgba(248,113,113,0.2)]"
                   }`}
                 >
-                  {isDeviceOnline && data?.wifiConnected
+                  {isDeviceOnline 
                     ? "Connected"
                     : "Disconnected"}
                 </p>
@@ -126,7 +126,7 @@ const Dashboard = () => {
               {/* 3. Firebase Server Sync Status */}
               <div
                 className={`p-4 rounded-xl bg-zinc-950/40 border transition-all duration-300 flex flex-col justify-between ${
-                  isDeviceOnline && data?.internetStatus
+                  isDeviceOnline 
                     ? "border-emerald-500/20 shadow-md shadow-emerald-950/10"
                     : "border-red-500/20 shadow-md shadow-red-950/10"
                 }`}
@@ -136,12 +136,12 @@ const Dashboard = () => {
                 </p>
                 <p
                   className={`font-mono text-xs font-black tracking-widest mt-2 uppercase ${
-                    isDeviceOnline && data?.internetStatus
+                    isDeviceOnline 
                       ? "text-emerald-400 drop-shadow-[0_0_6px_rgba(52,211,153,0.2)]"
                       : "text-red-400 drop-shadow-[0_0_6px_rgba(248,113,113,0.2)]"
                   }`}
                 >
-                  {isDeviceOnline && data?.internetStatus
+                  {isDeviceOnline 
                     ? "Online"
                     : "Offline"}
                 </p>

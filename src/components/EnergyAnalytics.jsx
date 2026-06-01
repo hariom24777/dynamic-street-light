@@ -8,7 +8,7 @@ const EnergyAnalytics = () => {
 
   const [currentTime, setCurrentTime] = useState(Math.floor(Date.now() / 1000));
 
-  // User adjustable tariff rate state (defaulted to ₹8/kWh)
+  // User adjustable tariff rate state (defaulted to ₹10/kWh)
   const [ratePerKwh, setRatePerKwh] = useState(10);
 
   useEffect(() => {
@@ -32,11 +32,7 @@ const EnergyAnalytics = () => {
 
   const secondsAgo = currentTime - lastUpdate;
 
-  const isDeviceOnline =
-    !!data &&
-    data.wifiConnected === true &&
-    data.internetStatus === true &&
-    secondsAgo < 10;
+  const isDeviceOnline = !!data && secondsAgo < 10;
 
   // Loading State
 
