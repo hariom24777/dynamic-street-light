@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { espCode } from '../data/espCode';
+import React, { useState } from "react";
+import { espCode } from "../data/espCode";
+import { Clipboard, ClipboardCheck } from "lucide-react";
 
 const CodeViewer = () => {
   const [copied, setCopied] = useState(false);
@@ -26,7 +27,6 @@ const CodeViewer = () => {
 
       {/* Terminal Container Wrapper */}
       <div className="bg-zinc-900/60 border border-zinc-800/80 rounded-2xl shadow-xl backdrop-blur-sm overflow-hidden flex flex-col w-full max-w-full">
-        
         {/* Terminal Application Window Banner Bar */}
         <div className="bg-zinc-950/80 border-b border-zinc-900/80 px-4 py-3 flex items-center justify-between gap-3 w-full">
           <div className="flex items-center gap-3 min-w-0">
@@ -47,7 +47,7 @@ const CodeViewer = () => {
             </div>
           </div>
 
-          {/* Action Hub: Clipboard Multi-State Action Controller (Responsive Text vs Icon) */}
+          {/* Action Hub: Clipboard Multi-State Action Controller */}
           <button
             onClick={handleCopyCode}
             className={`flex items-center justify-center gap-1.5 p-2 sm:px-3 sm:py-1.5 rounded-lg border text-[10px] font-mono uppercase tracking-wider font-bold transition-all duration-200 cursor-pointer shrink-0 ${
@@ -59,18 +59,12 @@ const CodeViewer = () => {
           >
             {copied ? (
               <>
-                <svg className="w-3.5 h-3.5 sm:w-3 sm:h-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-                {/* Text is hidden on small screens, block displays on sm and up */}
+                <ClipboardCheck className="w-3.5 h-3.5 sm:w-3 sm:h-3 shrink-0" />
                 <span className="hidden sm:inline">Copied!</span>
               </>
             ) : (
               <>
-                <svg className="w-3.5 h-3.5 sm:w-3 sm:h-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                </svg>
-                {/* Text is hidden on small screens, block displays on sm and up */}
+                <Clipboard className="w-3.5 h-3.5 sm:w-3 sm:h-3 shrink-0" />
                 <span className="hidden sm:inline">Copy Code</span>
               </>
             )}
@@ -78,18 +72,18 @@ const CodeViewer = () => {
         </div>
 
         {/* Source Panel Display Console Screen Codeblock */}
-        <div className="p-3 sm:p-5 overflow-auto max-h-[500px] bg-zinc-950/40 font-mono text-xs sm:text-sm text-zinc-300 leading-relaxed scrollbar-thin scrollbar-thumb-zinc-800 select-text w-full">
-          <pre className="text-left whitespace-pre-wrap break-all md:whitespace-pre md:break-normal select-text">
-            <code className="select-text block">{espCode}</code>
+        {/* FIXED: whitespace-pre combined with overflow-x-auto enables native touch-swiping side scrolls */}
+        <div className="p-3 sm:p-5 overflow-auto max-h-125 bg-zinc-950/40 font-mono text-xs sm:text-sm text-zinc-300 leading-relaxed scrollbar-thin scrollbar-thumb-zinc-800 select-text w-full">
+          <pre className="text-left whitespace-pre block scrollbar-thin scrollbar-thumb-zinc-800 select-text overflow-x-auto">
+            <code className="select-text block min-w-max">{espCode}</code>
           </pre>
         </div>
 
         {/* Console Footing Meta Terminal Status Ribbon */}
         <div className="bg-zinc-950/20 border-t border-zinc-900/60 px-4 py-2 flex flex-row items-center justify-between text-[9px] font-mono text-zinc-600 uppercase tracking-wider w-full gap-2">
-          <span className="truncate">Target: NodeMCU v3 ESP8266</span>
+          <span className="truncate">Target: NodeMCU ESP8266</span>
           <span className="shrink-0">Baud: 115200 bps</span>
         </div>
-
       </div>
     </section>
   );
