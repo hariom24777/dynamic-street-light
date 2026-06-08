@@ -94,8 +94,8 @@ const Navbar = () => {
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
-        <div className="bg-black px-2 py-13 flex flex-col gap-4 w-full">
-          <p className="text-zinc-600 uppercase mb-4 border-b border-zinc-900 pb-4"></p>
+        <div className="bg-black px-2 py-13 flex flex-col gap-2 w-full">
+          <p className="text-zinc-600 uppercase mb-2 border-b border-zinc-900 pb-4"></p>
 
           {NAV_LINKS.map((link) => (
             <NavLink
@@ -103,7 +103,7 @@ const Navbar = () => {
               to={link.to}
               onClick={closeSidebar}
               className={({ isActive }) =>
-                `py-2 px-4 text-base sm:text-lg font-bold uppercase tracking-widest rounded-md transition-all duration-300 hover:bg-zinc-900 ${
+                `py-1 px-4 text-base sm:text-lg font-bold tracking-widest rounded-md transition-all duration-300 hover:bg-zinc-900 ${
                   isActive
                     ? "text-amber-400"
                     : "text-zinc-500 hover:text-zinc-200"

@@ -1,10 +1,12 @@
 // Central Repository for ECE Final Year Major Project Meta-Information
 export const PROJECT_DETAILS = {
-//   title: "IoT-Driven Smart Street Lighting Grid Architecture",
   title: "Dynamic Street Light System",
   domain: "Embedded Systems & Wireless Telemetry Networks",
-  abstract:
-    "This system implements an intelligent microcontroller topology designed to modulate power grid utilities using adaptive peripheral sensor arrays. By evaluating real-time atmospheric luminance via LDR modules and lane multi-vector presence through infrared detectors, the processing core selectively actuates light arrays, resulting in an empirical reduction of baseline energy overheads. Telemetry is streamed to a live database cluster for remote diagnostics and financial metrics analysis.",
+  abstract: [
+    "Street lighting systems are one of the major consumers of electrical energy in urban and rural environments. Conventional street lighting systems operate continuously throughout the night regardless of traffic density, resulting in excessive energy consumption and increased operational costs. To overcome these challenges, this project presents a Dynamic Street Light Based on Movement using IoT and sensor-based automation.",
+    "The proposed system uses an ESP8266 NodeMCU microcontroller integrated with IR sensors and an LDR sensor. The LDR detects ambient light conditions and activates the system during nighttime, while IR sensors detect movement and control the corresponding street lights dynamically. LEDs are used as street lights and are activated only when movement is detected in the respective zone.",
+    "The system is connected to Firebase Realtime Database for real-time monitoring and data synchronization. A web-based dashboard developed using React.js provides live monitoring of sensor status, LED activity, energy consumption analytics, and system performance.The developed system significantly reduces unnecessary power consumption, increases energy efficiency, and demonstrates an effective approach toward smart city infrastructure and intelligent automation.",
+  ],
   hardwareStack: [
     "ESP8266 / Node MCU Core",
     "Light Dependent Resistor (LDR)",
@@ -30,6 +32,11 @@ export const TEAM_DETAILS = [
 ];
 
 export const FACULTY_DETAILS = {
+  hod: {
+    name: "Dr. Shalini Sahay",
+    designation: "Head of Department",
+    department: "Electronics & Communication Engineering",
+  },
   coordinator: {
     name: "Prof. Pramod Kumar",
     designation: "Senior Professor",

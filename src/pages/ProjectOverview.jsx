@@ -3,7 +3,7 @@ import {
   Cpu,
   GraduationCap,
   Award,
-  ShieldAlert,
+  ShieldAlert, // Imported for HOD Icon presentation
   FileText,
   Layers,
   ShieldUser,
@@ -22,7 +22,7 @@ const ProjectOverview = () => {
       <section className="bg-zinc-900/60 border border-zinc-800/80 rounded-2xl p-5 sm:p-6 shadow-xl backdrop-blur-sm">
         <div className="flex items-center gap-3 border-b border-zinc-800/60 pb-4 mb-4">
           <div className="p-2 bg-amber-500/10 rounded-xl border border-amber-500/20">
-            <FileText className="w-6 h-6 sm:w-8 sm:h-8  text-amber-400" />
+            <FileText className="w-6 h-6 sm:w-8 sm:h-8 text-amber-400" />
           </div>
           <div>
             <span className="text-[10px] sm:text-[12px] font-mono tracking-widest text-zinc-500 uppercase">
@@ -33,51 +33,92 @@ const ProjectOverview = () => {
             </h1>
           </div>
         </div>
-        <p className="text-zinc-400 text-sm leading-relaxed max-w-5xl">
-          {PROJECT_DETAILS.abstract}
-        </p>
+        <div className="space-y-4">
+          {PROJECT_DETAILS.abstract.map((paragraph, index) => (
+            <p
+              key={index}
+              className="text-zinc-400 text-sm leading-relaxed text-justify tracking-wide"
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
       </section>
 
-      {/* SECTION 2: ACADEMIC MENTORSHIP MATRIX */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-        {/* Project Coordinator Card */}
-        <div className="bg-zinc-900/40 border border-zinc-800/60 rounded-2xl p-5 flex items-start gap-4 shadow-lg">
-          <div className="p-3 bg-zinc-950 border border-zinc-800 rounded-xl text-amber-500">
-            <Award className="w-5 h-5" />
+      {/* SECTION 2: ACADEMIC MENTORSHIP & AUTHORITY MATRIX (UPDATED LAYER) */}
+      <section className="space-y-4">
+        <h3 className="text-xs font-bold text-zinc-600 tracking-widest uppercase px-1">
+          Academic Mentorship & Approvals
+        </h3>
+
+        {/* NEW: Full-Width Premium Head of Department (HOD) Board Card */}
+        <div className="bg-zinc-900/60 border border-zinc-800/80 rounded-2xl p-5 sm:p-6 shadow-xl backdrop-blur-sm flex items-center gap-4 transition-all duration-300 hover:border-zinc-800">
+          <div className="p-3 bg-zinc-950 border border-zinc-800 rounded-xl text-amber-500 shrink-0">
+            <Award className="w-6 h-6" />
           </div>
-          <div className="space-y-1">
+          <div className="space-y-1 min-w-0">
             <span className="text-[12px] font-mono tracking-widest text-zinc-500 uppercase">
-              Project Coordinator
+              Department Authority
             </span>
-            <h3 className="text-base font-bold text-zinc-200">
-              {FACULTY_DETAILS.coordinator.name}
+            <h3 className="text-base font-bold text-zinc-100 pt-1">
+              {FACULTY_DETAILS.hod.name}
             </h3>
-            <p className="text-xs text-zinc-400 font-medium">
-              {FACULTY_DETAILS.coordinator.designation}
+            <p className="text-xs text-zinc-400 font-semibold">
+              {FACULTY_DETAILS.hod.designation}
+            </p>
+            <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider">
+              {FACULTY_DETAILS.hod.department}
             </p>
           </div>
         </div>
 
-        {/* Project Guide Card */}
-        <div className="bg-zinc-900/40 border border-zinc-800/60 rounded-2xl p-5 flex items-start gap-4 shadow-lg">
-          <div className="p-3 bg-zinc-950 border border-zinc-800 rounded-xl text-emerald-500">
-            <ShieldUser className="w-5 h-5" />
+        {/* Existing Sub-Grid Container: Now sits directly below the HOD component */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          {/* Project Coordinator Card */}
+          <div className="bg-zinc-900/40 border border-zinc-800/60 rounded-2xl p-5 flex items-start gap-4 shadow-lg hover:border-zinc-800 transition-all duration-300">
+            <div className="p-3 bg-zinc-950 border border-zinc-800 rounded-xl text-amber-500">
+              <ShieldUser className="w-5 h-5" />
+            </div>
+            <div className="space-y-1">
+              <span className="text-[12px] font-mono tracking-widest text-zinc-500 uppercase">
+                Project Coordinator
+              </span>
+              <h3 className="text-base font-bold text-zinc-200">
+                {FACULTY_DETAILS.coordinator.name}
+              </h3>
+              <p className="text-xs text-zinc-400 font-medium">
+                {FACULTY_DETAILS.coordinator.designation}
+              </p>
+              <p className="text-[10px] font-mono text-zinc-500 tracking-wider">
+                {FACULTY_DETAILS.coordinator.department}
+              </p>
+            </div>
           </div>
-          <div className="space-y-1">
-            <span className="text-[12px] font-mono tracking-widest text-zinc-500 uppercase">
-              Project Guide
-            </span>
-            <h3 className="text-base font-bold text-zinc-200">
-              {FACULTY_DETAILS.guide.name}
-            </h3>
-            <p className="text-xs text-zinc-400 font-medium">
-              {FACULTY_DETAILS.guide.designation}
-            </p>
+
+          {/* Project Guide Card */}
+          <div className="bg-zinc-900/40 border border-zinc-800/60 rounded-2xl p-5 flex items-start gap-4 shadow-lg hover:border-zinc-800 transition-all duration-300">
+            <div className="p-3 bg-zinc-950 border border-zinc-800 rounded-xl text-amber-500">
+              <ShieldUser className="w-5 h-5" />
+            </div>
+            <div className="space-y-1">
+              <span className="text-[12px] font-mono tracking-widest text-zinc-500 uppercase">
+                Project Guide
+              </span>
+              <h3 className="text-base font-bold text-zinc-200">
+                {FACULTY_DETAILS.guide.name}
+              </h3>
+              <p className="text-xs text-zinc-400 font-medium">
+                {FACULTY_DETAILS.guide.designation}
+              </p>
+              <p className="text-[10px] font-mono text-zinc-500 tracking-wider">
+                {FACULTY_DETAILS.guide.department}
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* SECTION 3: TEAM DEPLOYMENT GRID (Optimized for exactly 4 columns) */}
+      {/* SECTION 3: TEAM DEPLOYMENT GRID */}
       <section>
         <h3 className="text-xs font-bold text-zinc-600 tracking-widest uppercase mb-4 px-1">
           Development Team Members
@@ -90,7 +131,7 @@ const ProjectOverview = () => {
             >
               <div className="space-y-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-[9px] font-mono tracking-wider bg-zinc-950 text-zinc-500 px-2 py-0.5 rounded border border-zinc-900">
+                  <span className="text-[9px] font-mono tracking-wider bg-zinc-950 text-zinc-400 px-2 py-0.5 rounded border border-zinc-900">
                     MEMBER_0{student.id}
                   </span>
                   <GraduationCap className="w-8 h-8 text-zinc-700" />
@@ -98,8 +139,6 @@ const ProjectOverview = () => {
                 <h4 className="text-base font-bold text-zinc-100 mt-3">
                   {student.name}
                 </h4>
-
-                {/* Clean Name & Enrollment layout structure mapping matching specifications */}
                 <div className="flex items-center gap-1.5 pt-1.5">
                   <span className="text-[10px] font-mono uppercase text-zinc-500 font-bold">
                     Enroll:
@@ -152,7 +191,8 @@ const ProjectOverview = () => {
           </div>
         </div>
       </section>
-      <CodeViewer/>
+
+      <CodeViewer />
     </div>
   );
 };
