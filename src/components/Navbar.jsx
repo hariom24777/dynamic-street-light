@@ -48,7 +48,7 @@ const Navbar = () => {
                 key={link.to}
                 to={link.to}
                 className={({ isActive }) =>
-                  `transition duration-300 text-xs lg:text-sm font-semibold uppercase tracking-wider ${
+                  `transition duration-300 text-xs lg:text-sm font-semibold tracking-wider ${
                     isActive
                       ? "text-amber-400 border-b-2 border-amber-400 pb-1"
                       : "text-zinc-400 hover:text-white"
